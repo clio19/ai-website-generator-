@@ -1,8 +1,9 @@
+"use client"
 import React, { JSX } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
-import { SignInButton } from '@clerk/nextjs'
+import { ArrowRight, Link } from 'lucide-react'
+import { SignInButton, useUser } from '@clerk/nextjs'
 
 const MenuOptions = [
     {
@@ -16,6 +17,8 @@ const MenuOptions = [
 ]
 
 function Header(): JSX.Element {
+ const {user} = useUser();
+
   return (
     <div className='flex items-center justify-between p4 shadow'>
         {/* Logo*/}
@@ -34,9 +37,15 @@ function Header(): JSX.Element {
     </div>
         {/* Get started Button*/}
     <div>
-        <SignInButton mode='modal' forceRedirectUrl={'/workspace'}>
+        { !user ? <SignInButton mode='modal'
+             forceRedirectUrl={'/workspace'}>
             <Button>Get Started <ArrowRight /></Button>
         </SignInButton>
+         :
+         <Link href={'/workspace'}>
+            <Button>Go to Workspace <ArrowRight /></Button>
+         </Link>
+    }
     </div>
     </div>
   );
