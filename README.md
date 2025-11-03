@@ -45,6 +45,34 @@ https://lucide.dev/
 https://orm.drizzle.team/docs/get-started/neon-new 
 https://console.neon.tech/app
 
+
+## drizzle.config.t
+
+import { defineConfig } from "drizzle-kit";
+
+## Migrar db - schema.ts
+
+```typescript
+export default defineConfig({
+  schema: "./src/db/schema.ts", // caminho do teu schema
+  out: "./drizzle",             // pasta para as migrações
+  driver: "pg",                 // driver PostgreSQL
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+```
+
+
+```bash
+npx drizzle-kit generate
+npx drizzle-kit generate --name init_schema # OPTIONAL
+npx drizzle-kit push
+
+
+
+```
+
 ```bash
 npx drizzle-kit studio 
 ```

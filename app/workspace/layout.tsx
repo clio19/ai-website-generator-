@@ -11,7 +11,7 @@ function WorkSpaceLayout({
   return ( 
     <SidebarProvider>
         <AppSidebar />
-        <div className='w-full'>
+        <div  className=''>
             <AppHeader />
         </div>
         <div>{children}</div>

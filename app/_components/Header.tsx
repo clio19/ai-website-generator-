@@ -2,7 +2,8 @@
 import React, { JSX } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Link } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import { SignInButton, useUser } from '@clerk/nextjs'
 
 const MenuOptions = [

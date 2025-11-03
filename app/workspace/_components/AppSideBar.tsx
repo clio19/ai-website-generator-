@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import {
@@ -5,17 +6,21 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
+  SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { UserDetailContext } from '@/context/UserDetailContext'
+import { Progress } from '@radix-ui/react-progress'
+import { UserButton } from '@clerk/nextjs'
 
 export function AppSidebar() {
-  const [projectList, setProjectList] = React.useState<Array<{id: string; name: string}>>([
-    {id: '1', name: 'Project One'},
-    {id: '2', name: 'Project Two'},
-  ]);
-
+  const [projectList, setProjectList] = React.useState([]);
+  const { userDetail, setUserDetail } = React.useContext(UserDetailContext) || {} as any;
+  
   return (
     <Sidebar>
       <div>
@@ -28,10 +33,25 @@ export function AppSidebar() {
       <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
-          
-        <SidebarGroup />
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          { projectList.length == 0 && <h2 className='text-sm px-2 text-gray-500'>No projects found</h2> }
+          { projectList.length > 0 && <SidebarGroupContent>
+           
+          </SidebarGroupContent> }
+        </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className='p-2'>
+        <div className='p-3 border rounded-xl space-y-3 bg-secondary'> 
+          <h2 className='flex justify-between items-center'>Remaining Credits <span className='font-bold'> {userDetail?.credits} </span> 
+          </h2>
+        <Progress value={33}></Progress>
+        <Button className='w-full'>Upgrade to Unlimited</Button>
+        </div>
+        <div className='flex items-center gap-2'>
+          <UserButton/>
+          <Button variant={'ghost'}>Settings</Button>
+        </div>
+     </SidebarFooter>
     </Sidebar>
   )
 }

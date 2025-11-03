@@ -13,20 +13,23 @@ export default function Provider({
     const [userDetail, setUserDetail] = React.useState<any>();
 
     useEffect(() => {
-        user && CreateUser();
+        user && CreateNewUserUser();
     }, [user]);
 
-    const CreateUser = async () => {
-       const result = await axios.post('/api/users',{
-       });
-       console.log("Create User", result.data);
-       setUserDetail(result.data?.user);
+    const CreateNewUserUser = async () => {
+       try {
+         const result = await axios.post('/api/users', {});
+         console.log("Create User", result.data);
+         setUserDetail(result.data?.user);
+       } catch (err) {
+         console.error('CreateUser failed', err);
+       }
     }
     return (
     <div>
-        <UserDetailContext value={{ userDetail, setUserDetail }}>        
+        <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>        
             {children}
-        </UserDetailContext>
+        </UserDetailContext.Provider>
     </div>
   )
 }

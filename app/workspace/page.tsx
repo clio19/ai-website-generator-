@@ -1,7 +1,11 @@
 import React from 'react'
+import Hero from '../_components/Hero'
 
-export default function page() {
+export default function Workspace() {
   return (
-    <div>page</div>
+    <div>
+      <Hero />      
+    </div>
   )
 }
+

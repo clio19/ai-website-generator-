@@ -1,4 +1,4 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, varchar, timestamp } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -6,3 +6,25 @@ export const usersTable = pgTable("users", {
   email: varchar({ length: 255 }).notNull().unique(),
   credits: integer().default(2),
 });
+
+export const projectTable = pgTable("projects", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  projectId: varchar().notNull().unique(),
+  createdBy: integer().references(() => usersTable.id),
+  createdOn: timestamp().defaultNow()
+});
+
+export const frameTable = pgTable("frames", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  frameId: varchar(),
+  projectId: integer().references(() => projectTable.id),
+  createdOn: timestamp().defaultNow()
+});
+
+export const chatTable = pgTable("chats", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  chatMessage: varchar(),
+  projectId: integer().references(() => projectTable.id),
+  createdOn: timestamp().defaultNow()
+});
+
