@@ -81,3 +81,10 @@ npx drizzle-kit studio
 
 https://dashboard.clerk.com/
 
+# AI 
+
+https://kravixstudio.com/dashboard
+
+https://openrouter.ai/google/gemini-2.5-flash-preview-09-2025/api
+
+https://play.tailwindcss.com/

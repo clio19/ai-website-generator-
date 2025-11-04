@@ -4,16 +4,15 @@ import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-react'
 
 type Props = {
-    messages?: Messages[]
-    onSend?: (text: string) => void
+    messages: Messages[]
+    onSend: any,
+    loading: boolean
 }
 
-function ChatSection({ messages = [], onSend }: Props) {
+function ChatSection({ messages = [], onSend, loading }: Props) {
   const [input, setInput ] = useState<string>();
   const handleSend=() => {
-    if (!input?.trim())  {
-      return
-    }
+    if (!input?.trim()) return;
     onSend?.(input);
     setInput('')
   }
@@ -40,6 +39,13 @@ function ChatSection({ messages = [], onSend }: Props) {
             </div>
           ))
         )}
+
+   { loading && <div className='flex justify-center items-center p-4'>
+          <div className='animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-zinc-800'>
+          </div>
+            <span className='ml-2 text-zinc-800'> Generating Code ... </span>
+        </div> }
+
         </div>
 
         {/* Footer input */}
