@@ -11,10 +11,10 @@ function WorkSpaceLayout({
   return ( 
     <SidebarProvider>
         <AppSidebar />
-        <div  className=''>
+        <div className='w-full'>
             <AppHeader />
+            {children}
         </div>
-        <div>{children}</div>
     </SidebarProvider>
   )
 }
